@@ -4,7 +4,7 @@ import os
 import setuptools
 
 
-name = "simple-giot"
+name = "simple_giot"
 description = "A simple Google IoT Core Device base class."
 version = "0.1.0"
 # Should be one of:
@@ -30,7 +30,7 @@ with io.open(readme_filename, encoding="utf-8") as readme_file:
 # Only include packages under the 'google' namespace. Do not include tests,
 # benchmarks, etc.
 packages = [
-    package for package in setuptools.find_packages() if package.startswith("iot_core_device")
+    package for package in setuptools.find_packages() if package.startswith("simple_giot")
 ]
 
 setuptools.setup(
