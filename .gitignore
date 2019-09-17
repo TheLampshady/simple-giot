@@ -6,6 +6,17 @@ __pycache__/
 # C extensions
 *.so
 
+*~
+*.DS_Store
+.idea
+*.pem
+*.p12
+*.coverage
+*.log
+.sass-cache
+*.datastore
+*.mo
+
 # Distribution / packaging
 .Python
 build/
@@ -14,7 +25,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+libs?/
 lib64/
 parts/
 sdist/
@@ -31,56 +42,6 @@ MANIFEST
 *.manifest
 *.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
 # Environments
 .env
 .venv
@@ -90,15 +51,12 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
+# Project Files
+#  Configs
+iot_config.json
 
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
+#  Images
+*.jpeg
+*.jpg
+*.png
+*.bmp
