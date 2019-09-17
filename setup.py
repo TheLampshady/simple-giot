@@ -4,10 +4,8 @@ import os
 import setuptools
 
 
-# Package metadata.
-
-name = "zgoldstein IoT Core Device"
-description = "Google IoT Core Device base class."
+name = "simple-giot"
+description = "A simple Google IoT Core Device base class."
 version = "0.1.0"
 # Should be one of:
 # 'Development Status :: 3 - Alpha'
