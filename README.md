@@ -6,6 +6,20 @@ A simple base class for connecting an IoT Core device.
 pip install git+https://github.com/TheLampshady/simple-giot.git
 ```
 
+# IoT Core
+Install and create certs for authentication with IoT Core
+
+Google CA cert
+```bash
+curl -O https://pki.goog/roots.pem 
+```
+
+Public / Private Cert
+```bash
+openssl genrsa -out rsa_private.pem 2048 && \\
+openssl rsa -in rsa_private.pem -pubout -out rsa_public.pem && \\
+cat rsa_public.pem
+```
 
 ## Example
 Create a class and override callback functions.
@@ -23,3 +37,4 @@ class MyClient(Client):
         super().on_connect(unused_client, unused_userdata, unused_flags, rc)
         print('Success!!!!')
 ```
+
