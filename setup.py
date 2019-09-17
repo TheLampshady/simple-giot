@@ -33,9 +33,6 @@ packages = [
     package for package in setuptools.find_packages() if package.startswith("iot_core_device")
 ]
 
-# Determine which namespaces are needed.
-namespaces = ["iot_core_device"]
-
 setuptools.setup(
     name=name,
     version=version,
@@ -59,7 +56,6 @@ setuptools.setup(
     ],
     platforms="Posix; MacOS X; Windows",
     packages=packages,
-    namespace_packages=namespaces,
     install_requires=dependencies,
     extras_require=extras,
     python_requires=">=3.5",
