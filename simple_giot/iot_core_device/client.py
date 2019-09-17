@@ -122,7 +122,7 @@ class Client(mqtt.Client):
         with open(file_name) as f:
             config = json.loads(f.read())
 
-        return Client(**config)
+        return cls(**config)
 
     def _authenticate(self):
         """

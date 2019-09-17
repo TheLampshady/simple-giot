@@ -6,7 +6,7 @@ import setuptools
 
 name = "simple_giot"
 description = "A simple Google IoT Core Device base class."
-version = "0.1.0"
+version = "0.1.1"
 # Should be one of:
 # 'Development Status :: 3 - Alpha'
 # 'Development Status :: 4 - Beta'
