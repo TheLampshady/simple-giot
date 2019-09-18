@@ -110,7 +110,7 @@ class Client(mqtt.Client):
         )
 
     @classmethod
-    def from_config(cls, file_name="iot_config.json"):
+    def from_config(cls, file_name="iot_config.json", *args, **kwargs):
         """
         Loads configurations from a JSON file.
         :param file_name: name of config JSON file.
@@ -121,7 +121,8 @@ class Client(mqtt.Client):
 
         with open(file_name) as f:
             config = json.loads(f.read())
-
+            
+        config.update(kwargs)
         return cls(**config)
 
     def _authenticate(self):
