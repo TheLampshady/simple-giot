@@ -22,6 +22,8 @@ cat rsa_public.pem
 ```
 
 ## Example
+
+### Extend Class
 Create a class and override callback functions.
 
 ```python
@@ -29,12 +31,19 @@ from simple_giot.iot_core_device import Client
 
 class MyClient(Client):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, new_arg, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.test = 1
+        self.service = new_arg
 
     def on_connect(self, unused_client, unused_userdata, unused_flags, rc):
         super().on_connect(unused_client, unused_userdata, unused_flags, rc)
         print('Success!!!!')
+
+    def process_config(self, payload):
+        self.service.run(payload)
 ```
+
+### 
+
+
 

@@ -1,0 +1,4 @@
+python-socketio
+requests # required by socketio
+websocket-client # requested by socketio client
+Flask
