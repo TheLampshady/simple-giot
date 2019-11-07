@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from datetime import datetime as dt, timedelta
 
 from simple_giot.iot_core_device import MQTTClient
