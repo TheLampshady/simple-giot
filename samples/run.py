@@ -1,5 +1,9 @@
 #!/usr/bin/env python
+
+import logging
 from datetime import datetime as dt, timedelta
+
+logging.basicConfig(level=logging.DEBUG)
 
 from simple_giot.iot_core_device import MQTTClient
 
