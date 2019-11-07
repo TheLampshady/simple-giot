@@ -27,9 +27,9 @@ cat rsa_public.pem
 Create a class and override callback functions.
 
 ```python
-from simple_giot.iot_core_device import Client
+from simple_giot.iot_core_device import MQTTClient
 
-class MyClient(Client):
+class MyClient(MQTTClient):
 
     def __init__(self, new_arg, *args, **kwargs):
         super().__init__(*args, **kwargs)
