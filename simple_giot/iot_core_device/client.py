@@ -93,10 +93,11 @@ class MQTTClient(mqtt.Client):
 
         logger.info(
             "IoT Core Connection: \n"
-            "\tProject '%s' \n"
-            "\tRegistry '%s' \n"
-            "\tDevice '%s'" %
-            (self.project_id, registry_id, device_id)
+            "\tProject: %s \n"
+            "\tRegistry: %s \n"
+            "\tDevice: %s \n" 
+            "\tRetry Time: %d \n" %
+            (self.project_id, registry_id, device_id, retry_time)
         )
 
         # Create the MQTT client and connects to Cloud IoT.
@@ -316,3 +317,13 @@ class MQTTClient(mqtt.Client):
             raise IoTPayloadError(msg, getsizeof(payload) / self.size_limit)
         logger.debug('Publishing Payload')
         return self.publish(self.event_topic, payload, qos=1)
+
+
+if __name__ == "__main__":
+    client = MQTTClient.from_config()
+    client.send_state()
+    expire_time = dt.utcnow() + timedelta(minutes=5)
+    cmd_last = None
+    cfg_last = None
+    time.sleep(3)
+    client.close()
