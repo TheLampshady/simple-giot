@@ -30,7 +30,7 @@ with io.open(readme_filename, encoding="utf-8") as readme_file:
 # Only include packages under the 'google' namespace. Do not include tests,
 # benchmarks, etc.
 packages = [
-    "simple_giot"
+     package for package in setuptools.find_packages() if package.startswith("simple_giot")
 ]
 
 setuptools.setup(
