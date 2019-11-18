@@ -62,7 +62,7 @@ class MQTTClient(mqtt.Client):
         self.expire_time = self.start_dt
         self._is_ssl_set = False
         self.connected = False
-        self._log_disconnect = True
+        self._current_error_code = True
 
         # Device Settings
         self.command_message = ""
@@ -112,7 +112,7 @@ class MQTTClient(mqtt.Client):
         :return:
         """
         if not os.path.isfile(file_name):
-            return None
+            raise FileExistsError("Cannot find file: '%s' " % "iot_config.json")
 
         with open(file_name) as f:
             config = json.loads(f.read())
@@ -234,13 +234,13 @@ class MQTTClient(mqtt.Client):
         """Callback for when a device disconnects."""
         if not rc:
             logger.debug('Disconnected')
-            self._log_disconnect = True
-        elif self._log_disconnect:
+        elif self._current_error_code != rc:
             logger.error('Disconnection Error: ' + self.error_str(rc))
-            self._log_disconnect = False
+
+        self._current_error_code = rc
         self.connected = False
         self.start_dt = dt.utcnow()
-        if rc == 4:
+        if rc:
             self._authenticate()
 
     def on_publish(self, unused_client, unused_userdata, unused_mid):
@@ -325,5 +325,6 @@ if __name__ == "__main__":
     expire_time = dt.utcnow() + timedelta(minutes=5)
     cmd_last = None
     cfg_last = None
-    time.sleep(3)
+    while True:
+        pass
     client.close()
