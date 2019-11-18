@@ -326,5 +326,5 @@ if __name__ == "__main__":
     cmd_last = None
     cfg_last = None
     while True:
-        pass
+        client.check_reconnect()
     client.close()
