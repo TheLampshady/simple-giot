@@ -43,7 +43,10 @@ class MyClient(MQTTClient):
         self.service.run(payload)
 ```
 
-### 
+# References
 
+## Google IoT
+https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/iot/api-client/mqtt_example/cloudiot_mqtt_example.py
 
+https://medium.com/google-cloud/refreshing-json-web-tokens-jwts-for-google-cloud-iot-core-897318df3836
 
