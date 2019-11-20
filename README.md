@@ -1,6 +1,7 @@
 # Simple Google IoT Core 
 A simple base class for connecting an IoT Core device.
 
+
 # Setup
 ```bash
 pip install git+https://github.com/TheLampshady/simple-giot.git
