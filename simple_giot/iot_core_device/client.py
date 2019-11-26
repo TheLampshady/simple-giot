@@ -24,8 +24,9 @@ CA_CERTS = "roots.pem"
 MQTT_BRIDGE_HOSTNAME = 'mqtt.googleapis.com'
 MQTT_BRIDGE_PORT = 8883
 
-DEFAULT_RETRY = (60 * 24) - 5  # ~24 hours refresh
+DEFAULT_EXPIRE = (60 * 24) - 5  # ~24 hours refresh
 DEFAULT_KEEP_ALIVE = 30
+PRE_AUTH_TIME = min(DEFAULT_EXPIRE // 5, 2) + 1
 
 MAX_MESSAGE_SIZE = 262144
 
@@ -44,7 +45,7 @@ class MQTTClient(mqtt.Client):
                  device_id, registry_id, project_id, cloud_region=DEFAULT_REGION,
                  algorithm=ALGORITHM, private_cert=PRIVATE_CERT, ca_cert=CA_CERTS,
                  bridge_hostname=MQTT_BRIDGE_HOSTNAME, bridge_port=MQTT_BRIDGE_PORT,
-                 retry_time=DEFAULT_RETRY, keepalive=DEFAULT_KEEP_ALIVE, validate_size=True
+                 retry_time=DEFAULT_EXPIRE, keepalive=DEFAULT_KEEP_ALIVE, validate_size=True
                  ):
         # IoT Core setup
         self.project_id = project_id
@@ -168,7 +169,7 @@ class MQTTClient(mqtt.Client):
 
     def check_reconnect(self):
         """ Checks expired credentials and refreshes """
-        if self.expire_time < dt.utcnow() + timedelta(minutes=1):
+        if self.expire_time < dt.utcnow() + timedelta(minutes=PRE_AUTH_TIME):
             if not self.connected:
                 self.close()
                 self.start()
