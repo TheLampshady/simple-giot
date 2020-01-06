@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 
 IoTConnectionException = mqtt.socket.gaierror
 
+DEFAULT_CONFIG = "iot_config.json"
+
 DEFAULT_REGION = "us-central1"
 CLIENT_ID_PATH = 'projects/%s/locations/%s/registries/%s/devices/%s'
 
@@ -43,15 +45,17 @@ class MQTTClient(mqtt.Client):
 
     def __init__(self,
                  device_id, registry_id, project_id, cloud_region=DEFAULT_REGION,
-                 algorithm=ALGORITHM, private_cert=PRIVATE_CERT, ca_cert=CA_CERTS,
+                 algorithm=ALGORITHM, config_path=None, private_cert=PRIVATE_CERT, ca_cert=CA_CERTS,
                  bridge_hostname=MQTT_BRIDGE_HOSTNAME, bridge_port=MQTT_BRIDGE_PORT,
                  retry_time=DEFAULT_EXPIRE, keepalive=DEFAULT_KEEP_ALIVE, validate_size=True
                  ):
         # IoT Core setup
         self.project_id = project_id
+
+        config_path = config_path or ""
         self.algorithm = algorithm
-        self.private_cert = private_cert
-        self.ca_cert = ca_cert
+        self.private_cert = os.path.join(config_path, private_cert)
+        self.ca_cert = os.path.join(config_path, ca_cert)
 
         self.bridge_hostname = bridge_hostname
         self.bridge_port = bridge_port
@@ -106,12 +110,16 @@ class MQTTClient(mqtt.Client):
         self.start()
 
     @classmethod
-    def from_config(cls, file_name="iot_config.json", *args, **kwargs):
+    def from_config(cls, file_name=DEFAULT_CONFIG, *args, **kwargs):
         """
         Loads configurations from a JSON file.
         :param file_name: name of config JSON file.
         :return:
         """
+        if os.path.isdir(file_name):
+            kwargs['config_path'] = file_name
+            file_name = os.path.join(file_name, DEFAULT_CONFIG)
+
         if not os.path.isfile(file_name):
             raise FileExistsError("Cannot find file: '%s' " % "iot_config.json")
 
